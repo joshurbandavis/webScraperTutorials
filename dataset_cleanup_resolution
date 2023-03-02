@@ -1,0 +1,17 @@
+#!/bin/bash
+
+function rmImgBySize
+{
+  minX=512
+  miny=512
+  xres=`identify -format "%[fx:w]" "$1"`
+  yres=`identify -format "%[fx:h]" "$1"`
+  if [ $xres -lt $minX ] || [ $yres -lt $minY ]
+  then
+    rm "$1"
+  fi
+}
+
+export -f rmImgBySize
+
+find /Users/imac/Desktop/nasa_space_images -iname "*.png" -o -iname "*.jpg" -o -iname "*.jpeg" -o -iname "*.jpeg" -exec bash -c 'rmImgBySize "$0"' "{}" \;
